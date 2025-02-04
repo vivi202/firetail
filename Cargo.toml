@@ -1,0 +1,14 @@
+[package]
+name = "firetail"
+version = "0.1.0"
+edition = "2021"
+description = "firetail is a tui tool designed to filter and view your Opnsense firewall logs with ease, It's still in development, but it already offers key features for efficient log analysis."
+
+[dependencies]
+chrono = "0.4.39"
+clap = { version = "4.5.27", features = ["derive"] }
+ratatui = "0.29.0"
+rsyslog = { version = "0.1.5", features = ["chrono-timestamp"] }
+senpa = "0.1.1"
+tokio = { version = "1.43.0", features = ["full"] }
+tui-input = "0.11.1"
