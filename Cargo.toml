@@ -3,7 +3,8 @@ name = "firetail"
 version = "0.1.0"
 edition = "2021"
 description = "firetail is a tui tool designed to filter and view your Opnsense firewall logs with ease, It's still in development, but it already offers key features for efficient log analysis."
-
+repository = "https://github.com/vivi202/firetail"
+license="MIT"
 [dependencies]
 chrono = "0.4.39"
 clap = { version = "4.5.27", features = ["derive"] }
