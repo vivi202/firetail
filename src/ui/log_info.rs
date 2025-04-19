@@ -64,15 +64,11 @@ impl LogInfoPopup {
             ]),
             Line::from(vec![
                 " 󰿘 Protocol: ".bold(),
-                format!(
-                    "{}",
-                    match &log.protocol.name {
-                        senpa::ProtoName::Tcp => "TCP",
-                        senpa::ProtoName::Udp => "UDP",
-                        senpa::ProtoName::Other(s) => &s,
-                    }
-                )
-                .into(),
+                match &log.protocol.name {
+                    senpa::ProtoName::Tcp => "TCP",
+                    senpa::ProtoName::Udp => "UDP",
+                    senpa::ProtoName::Other(s) => s,
+                }.to_string().into(),
             ]),
         ];
 
