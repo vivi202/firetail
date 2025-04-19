@@ -39,7 +39,7 @@ firetail -i vlan0.20 filter_20250102.log
 Show logs filtered by the `vlan0.20` interface.
 
 ```bash
-firetail -i vlan0.20,vlan0.10 -d 192.168.40.10 filter_20250102.log
+firetail -i vlan0.20,vlan0.10 --dst-ip 192.168.40.10 filter_20250102.log
 ```
 Show logs filtered by the `vlan0.20` and `vlan0.10` interfaces, and the destination IP `192.168.40.10`.
 
