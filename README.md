@@ -65,9 +65,10 @@ Show logs filtered by the `vlan0.20` and `vlan0.10` interfaces, and the destinat
 | `Enter` (in edit mode) | Confirm edit and return to normal mode           |
 | `Esc` (in edit mode)   | Cancel edit and return to normal mode            |
 
+# Todos
+- [ ] Allow to change filter settings in realtime
 
 # Contributing
-
 Contributions are very welcome and appreciated! Feel free to open an issue, submit a pull request, or suggest improvements. :rocket:
 
 # Support
