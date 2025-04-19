@@ -9,25 +9,34 @@ use std::{
     io::{self},
     process::exit,
 };
-
-mod action;
-mod app;
+mod cidr;
 mod cli;
-mod filter;
 mod ingesters;
+mod port_filter;
+mod filter;
 mod packet_filter;
 mod ui;
+mod action;
+mod app;
 use ingesters::{file_log::FileLogIngester, stdin::StdinLogIngester, LogIngester};
+
 #[derive(Clone)]
 pub struct TimestampedLog {
     pub timestamp: chrono::DateTime<Local>,
     pub log: FwLog,
 }
-//TODO implement AutoScroll
+
 #[tokio::main]
 async fn main() -> io::Result<()> {
     let cli = Cli::parse();
-    let filter = cli.build_filter();
+
+    let filter = match cli.build_filter() {
+        Ok(filter) => filter,
+        Err(e) => {
+            println!("{:?}",e);
+            exit(1);
+        },
+    };
 
     let (parsed_log, notify) = match cli.logfile {
         Some(log_file) => match FileLogIngester::new(log_file).await {
@@ -39,7 +48,7 @@ async fn main() -> io::Result<()> {
             }
             Err(e) => {
                 eprintln!("Error initializing log ingester: {}", e);
-                exit(1);
+                exit(2);
             }
         },
         None => {
