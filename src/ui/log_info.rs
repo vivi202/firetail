@@ -30,11 +30,11 @@ impl LogInfoPopup {
 
         let mut content = vec![
             Line::from(vec![
-                " Timestamp: ".bold(),
+                " Timestamp: ".bold(),
                 format!("{}", self.timestamped_log.timestamp).into(),
             ]),
             Line::from(vec![
-                " Action: ".bold(),
+                " Action: ".bold(),
                 match log.packet_filter.action {
                     Action::Pass => "Pass".green().bold(),
                     Action::Reject => "Reject".green().bold(),
@@ -42,28 +42,28 @@ impl LogInfoPopup {
                 },
             ]),
             Line::from(vec![
-                "  Interface: ".bold(),
+                " Interface: ".bold(),
                 log.packet_filter.interface.to_string().into(),
-                "  Direction: ".bold(),
+                " Direction: ".bold(),
                 match log.packet_filter.dir {
-                    Dir::In => "Inbound".green(),
-                    Dir::Out => "Outbound".blue(),
+                    Dir::In => " Inbound".green(),
+                    Dir::Out => " Outbound".blue(),
                 },
             ]),
             Line::from(vec![
-                "  Src IP: ".bold(),
+                " Src IP: ".bold(),
                 format!("{}", log.ip_data.src).into(),
             ]),
             Line::from(vec![
-                "  Dst IP: ".bold(),
+                " Dst IP: ".bold(),
                 format!("{}", log.ip_data.dst).into(),
             ]),
             Line::from(vec![
-                "  IP packet length: ".bold(),
+                " IP packet length: ".bold(),
                 format!("{}", log.ip_data.length).into(),
             ]),
             Line::from(vec![
-                " 󰿘 Protocol: ".bold(),
+                " Protocol: ".bold(),
                 match &log.protocol.name {
                     senpa::ProtoName::Tcp => "TCP",
                     senpa::ProtoName::Udp => "UDP",
@@ -74,53 +74,53 @@ impl LogInfoPopup {
 
         match &log.proto_info {
             ProtoInfo::UdpInfo(udp) => {
-                content.push(Line::from(" 󱜠 UDP Info:".bold()));
+                content.push(Line::from(" UDP Info: ".bold()));
                 content.push(Line::from(vec![
-                    "  Src Port: ".bold(),
-                    format!("{}", udp.ports.srcport).into(),
-                    " 󰣉 Dst Port: ".bold(),
-                    format!("{}", udp.ports.dstport).into(),
-                    " 󰏗 Data: ".bold(),
-                    format!("{} bytes", udp.data_len).into(),
+                    " Src Port: ".bold(),
+                    format!(" {} ", udp.ports.srcport).into(),
+                    " Dst Port: ".bold(),
+                    format!(" {} ", udp.ports.dstport).into(),
+                    " Data: ".bold(),
+                    format!(" {} bytes ", udp.data_len).into(),
                 ]));
             }
 
             ProtoInfo::TcpInfo(tcp) => {
-                content.push(Line::from("  TCP Info:".bold()));
+                content.push(Line::from(" TCP Info: ".bold()));
                 content.push(Line::from(vec![
-                    "  Src Port: ".bold(),
-                    format!("{}", tcp.ports.srcport).into(),
-                    " 󰣉 Dst Port: ".bold(),
-                    format!("{}", tcp.ports.dstport).into(),
-                    "  󰏗 Data: ".bold(),
-                    format!("{} bytes", tcp.data_len).into(),
+                    " Src Port: ".bold(),
+                    format!(" {} ", tcp.ports.srcport).into(),
+                    " Dst Port: ".bold(),
+                    format!(" {} ", tcp.ports.dstport).into(),
+                    " Data: ".bold(),
+                    format!(" {} bytes ", tcp.data_len).into(),
                 ]));
 
                 let mut line = vec![
-                    "  Flags: ".bold(),
+                    " Flags: ".bold(),
                     tcp.flags.to_string().into(),
-                    "  󱎉 Seq #: ".bold(),
+                    " Seq #: ".bold(),
                     tcp.sequence_number.to_string().into(),
                 ];
                 if let Some(ack) = tcp.ack_number {
-                    line.extend(vec![" 󰄬 Ack #: ".bold(), format!("{}", ack).into()]);
+                    line.extend(vec![" 󰄬 Ack #: ".bold(), format!(" {} ", ack).into()]);
                 }
                 content.push(Line::from(line));
 
-                let mut line = vec!["  Window: ".bold(), format!("{}", tcp.window).into()];
+                let mut line = vec![" Window: ".bold(), format!("{}", tcp.window).into()];
                 if let Some(urg) = tcp.urg {
                     line.extend(vec!["  Urg: ".bold(), format!("{}", urg).into()]);
                 }
                 content.push(Line::from(line));
 
                 content.push(Line::from(vec![
-                    "  Options: ".bold(),
+                    "Options: ".bold(),
                     tcp.options.to_string().into(),
                 ]));
             }
 
             ProtoInfo::UnknownInfo(info) => {
-                content.push(Line::from("  Unknown Protocol Info:".bold()));
+                content.push(Line::from(" Unknown Protocol Info: ".bold()));
                 content.push(Line::from(info.to_string()));
             }
         }
@@ -135,7 +135,7 @@ impl Widget for LogInfoPopup {
         Clear.render(area, buf);
 
         let block = Block::new()
-            .title(Line::from("  log info "))
+            .title(Line::from(" log info "))
             .title_style(self.title_style)
             .borders(Borders::ALL)
             .border_style(self.border_style);

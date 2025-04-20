@@ -156,7 +156,7 @@ impl LogView {
         }
         let block = Block::default()
             .borders(Borders::ALL)
-            .title("  Logs ")
+            .title("Logs")
             .style(Style::default());
         let inner_area = block.inner(area);
 
