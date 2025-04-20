@@ -12,9 +12,9 @@ With `firetail`, you can quickly parse and interact with firewall logs, ensuring
 
 # Demo
 ![Alt Text](demo/demo.gif)
+
 # Prerequisites
-* A linux based OS.
-* [Nerd Fonts](https://www.nerdfonts.com/) (optional, but recommended for proper icon rendering)
+* A linux based OS / FreeBSD.
 
 # Quickstart
 

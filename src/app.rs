@@ -138,7 +138,7 @@ impl App {
                         .split(layout[1]);
 
                 let date_search =
-                    Paragraph::new(Text::from(format!("󰥌 {}", self.date_input.value())))
+                    Paragraph::new(Text::from(format!("Date: {}", self.date_input.value())))
                         .block(Block::bordered().yellow())
                         .centered();
 
@@ -146,7 +146,7 @@ impl App {
 
                 // Footer with centered instructions
                 let instructions =
-                    Paragraph::new(Text::from("↑/↓: Scroll  | i: Show log info |  q: Quit"))
+                    Paragraph::new(Text::from(" i: Show log info |  q: Quit "))
                         .centered()
                         .style(Style::default().fg(Color::Gray))
                         .block(Block::bordered());
